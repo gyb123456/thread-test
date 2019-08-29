@@ -1,4 +1,4 @@
-package com.example.threadtest;
+package com.example.threadtest.thread;
 
 /**
  * @author ：GYB

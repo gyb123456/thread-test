@@ -1,14 +1,17 @@
 package com.example.threadtest;
 
+import com.example.threadtest.thread.MyThreadImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
+@EnableCaching
 public class ThreadTestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ThreadTestApplication.class, args);
-        test2();
+//        test2();
     }
 
     public static void test2(){
@@ -19,6 +22,12 @@ public class ThreadTestApplication {
         Thread thread2 = new Thread(threadImpl, "窗口2");
         thread1.start();
         thread2.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }).start();
     }
 
 }

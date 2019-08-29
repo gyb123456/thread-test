@@ -1,0 +1,20 @@
+server:
+  port: 80
+spring:
+#  redis:
+#    host: m3.beacool.com
+#    host: 192.168.0.13
+#    port: 6379
+#    database: 0
+#    password: M0rethanTest2o17
+  redis:
+    host: 192.168.0.243
+    port: 6379
+    database: 1
+    password: 123456
+  cache:
+    type: ehcache
+    redis:
+      time-to-live: 30000
+    cache-names: ch1,ch2,gyb
+

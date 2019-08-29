@@ -1,10 +1,15 @@
 package com.example.threadtest;
 
-import junit.textui.TestRunner;
+import com.example.threadtest.thread.MyThread;
+import com.example.threadtest.thread.MyThreadImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static java.lang.Thread.sleep;
 
@@ -35,6 +40,7 @@ public class Test1 {
         Thread t = Thread.currentThread();
         System.out.println("Thread name:"+t.getName());
         System.out.println("Thread.isDaemon="+t.isDaemon());;
+
         //只创建一个实例
         MyThreadImpl threadImpl = new MyThreadImpl();
         //将上面创建的唯一实例放入多个线程中，Thread类提供了多个构造方法，见下图（构造方法摘要）
@@ -52,7 +58,7 @@ public class Test1 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
+//利用这种方法阻塞主进程也是可用的
 //        try {
 //            Thread.sleep(1000*10);
 //        } catch (InterruptedException e) {
@@ -126,5 +132,28 @@ public class Test1 {
         thread.setDaemon(true);
         thread.start();
         thread.join();
+    }
+
+    @Test
+    public void testx(){
+        for (int i = 1; i < 10; i++) {
+            System.out.println("1==i = " + i);
+            int j = i++;
+            System.out.println("2==i = " + i);
+            System.out.println("3==j = " + j);
+        }
+    }
+    @Test
+    public void testxx(){
+        List<PPP> vos = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            PPP ppp = new PPP();
+            ppp.setConfigVersion(i);
+            vos.add(ppp);
+        }
+
+        System.out.println("====原始数据{}"+vos);
+        vos.sort(Comparator.comparing(PPP::getConfigVersion).reversed());
+        System.out.println("====sort后数据{}"+vos);
     }
 }
